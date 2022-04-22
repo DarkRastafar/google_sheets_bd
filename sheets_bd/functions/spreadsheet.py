@@ -3,7 +3,7 @@ import httplib2
 import googleapiclient.discovery
 from oauth2client.service_account import ServiceAccountCredentials
 
-sys.path.append('C:\\bd_for_google_sheets\\')
+sys.path.append('C:\\google_sheets_bd\\')
 from config import CREDENTIALS_FILE
 
 
