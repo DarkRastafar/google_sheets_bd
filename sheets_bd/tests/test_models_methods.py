@@ -1,11 +1,10 @@
 import django
 import os
-
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "google_sheets_bd.settings")
 django.setup()
 
 from unittest import TestCase
-from google_sheets_bd.sheets_bd.functions.models_methods import return_spreadsheet_data
+from sheets_bd.functions.models_methods import return_spreadsheet_data
 
 
 class SoloFunctionsTestCase(TestCase):

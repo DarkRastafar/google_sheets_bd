@@ -1,5 +1,5 @@
-from google_sheets_bd.sheets_bd.functions.spreadsheet import Spreadsheet
-from google_sheets_bd.sheets_bd.models import Clients
+from sheets_bd.functions.spreadsheet import Spreadsheet
+from sheets_bd.models import Clients
 
 
 def return_spreadsheet_data():
