@@ -1,6 +1,6 @@
 from sheets_bd.functions.sheet import return_index_client, return_index_bank
 from sheets_bd.functions.spreadsheet import Spreadsheet
-from sheets_bd.models import Clients
+from sheets_bd.models import Clients, RangeModel, SheetsResponses
 from loguru import logger
 
 
@@ -12,6 +12,24 @@ def return_spreadsheet_data() -> dict:
     column_start = 'A'
     column_end = 'CV'
     return spreadsheet_instance.reed(sheets_name, start_rows, column_start, end_rows, column_end)
+
+
+def create_range_model(range_data: str) -> RangeModel:
+    return RangeModel.objects.create(range_field=range_data)
+
+
+def return_range_model_instance(range_data: str) -> RangeModel:
+    qw = RangeModel.objects.filter(range_field=range_data)
+    if qw.exists():
+        return qw[0]
+    return create_range_model(range_data)
+
+
+def create_sheet_responses():
+    spreadsheet_data = return_spreadsheet_data()
+    SheetsResponses.objects.create(
+        range_field=return_range_model_instance(spreadsheet_data['range']),
+        response=spreadsheet_data['values'])
 
 
 def return_field_client(client: list, field: str, boolean: bool = False) -> [str, bool]:
@@ -32,9 +50,10 @@ def check_boolean_variable(client_field: str, boolean: bool) -> [str, bool]:
     return client_field
 
 
-def create_clients_model(client: list):
+def create_clients_model(client: list, range_data: str):
     if not Clients.objects.filter(inn=client[return_index_client("inn")]).exists():
         Clients.objects.create(
+            range_field=return_range_model_instance(range_data),
             inn=return_field_client(client, "inn"), name_company=return_field_client(client, "name_company"),
             surname=return_field_client(client, "surname"), first_name=return_field_client(client, "first_name"),
             patronomic=return_field_client(client, "patronomic"), phone=return_field_client(client, "phone"),
@@ -115,13 +134,8 @@ def create_clients_model(client: list):
 def start_create_clients_model():
     spreadsheet_data = return_spreadsheet_data()
     values_list = spreadsheet_data['values']
+    range_data = spreadsheet_data['range']
     len_values_list = len(values_list)
     for index, client in enumerate(values_list[1:]):
-        create_clients_model(client)
+        create_clients_model(client, range_data)
         logger.info(f'{index} из {len_values_list} сохранено')
-
-
-def create_range_model():
-    spreadsheet_data = return_spreadsheet_data()
-    range_data = spreadsheet_data['range']
-    print(range_data)
