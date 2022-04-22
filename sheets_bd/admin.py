@@ -11,10 +11,16 @@ class ParentClientsAdmin(admin.ModelAdmin):
     fieldsets = clients_fieldsets
 
 
+class SheetsResponsesInline(admin.TabularInline):
+    model = SheetsResponses
+    extra = 0
+
+
 @admin.register(RangeModel)
 class RangeModelAdmin(admin.ModelAdmin):
     list_display = ['range_field']
     list_per_page = 5
+    inlines = [SheetsResponsesInline]
 
 
 @admin.register(Clients)
