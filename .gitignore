@@ -3,3 +3,4 @@ venv
 config.py
 json/precise-antenna-340911-400087b68b18.json
 __pycache__
+/__pycache__
