@@ -1,4 +1,4 @@
-from sheets_bd.functions.models_methods import return_model_fields
+from sheets_bd.functions.fields_methods import return_model_fields
 
 
 alfabank_list_display = return_model_fields('alfa')
