@@ -1,6 +1,5 @@
 import time
-
-from sheets_bd.functions.sheet import return_index_client, return_index_bank
+from sheets_bd.functions.fields_methods import create_kwargs_client, return_bank_field
 from sheets_bd.functions.spreadsheet import Spreadsheet
 from sheets_bd.models import Clients, RangeModel, SheetsResponses
 from loguru import logger
@@ -27,64 +26,27 @@ def return_range_model_instance(range_data: str) -> RangeModel:
     return create_range_model(range_data)
 
 
-def create_sheet_responses():
+def create_sheet_responses() -> None:
     spreadsheet_data = return_spreadsheet_data()
     SheetsResponses.objects.create(
         range_field=return_range_model_instance(spreadsheet_data['range']),
         response=spreadsheet_data['values'])
 
 
-def return_field_client(client: list, field: str, boolean: bool = False) -> [str, bool]:
-    try:
-        return check_boolean_variable(client[return_index_client(field)], boolean)
-    except:
-        if boolean is not None:
-            return boolean
-        return ''
-
-
-def return_bank_field(client: list, field: str, bank: str, boolean: bool = False) -> [str, bool]:
-    try:
-        return check_boolean_variable(client[return_index_bank(bank, field)], boolean)
-    except:
-        if boolean is True:
-            return boolean
-        return ''
-
-
-def check_boolean_variable(client_field: str, boolean: bool) -> [str, bool]:
-    if boolean is True:
-        variable_dict = {"TRUE": True, "FALSE": False}
-        if client_field in variable_dict:
-            return variable_dict[client_field]
-        else:
-            return False
-    return client_field
-
-
-def create_kwargs_client(client) -> dict:
-    kwargs_client = {}
-    # for field in ['inn', 'name_company', 'surname']:
-    for field in ['inn']:
-        kwargs_client.update({field: return_field_client(client, field)})
-    return kwargs_client
-
-
-def create_clients_model(client: list, range_data: str):
-    # if not Clients.objects.filter(inn=client[return_index_client("inn")]).exists():
+def create_clients_model(client: list, range_data: str) -> None:
     kwargs_client = create_kwargs_client(client)
     Clients.objects.create(
         range_field=return_range_model_instance(range_data),
         # inn=return_field_client(client, "inn"),
-        name_company=return_field_client(client, "name_company"),
-        surname=return_field_client(client, "surname"), first_name=return_field_client(client, "first_name"),
-        patronomic=return_field_client(client, "patronomic"), phone=return_field_client(client, "phone"),
-        adress=return_field_client(client, "adress"), adress_one=return_field_client(client, "adress_one"),
-        adress_two=return_field_client(client, "adress_two"), date=return_field_client(client, "date"),
-        priority=return_field_client(client, "priority"),
-        check_priority=return_field_client(client, "check_priority", boolean=True),
-        make_general_comment=return_field_client(client, "make_general_comment"),
-
+        # name_company=return_field_client(client, "name_company"),
+        # surname=return_field_client(client, "surname"), first_name=return_field_client(client, "first_name"),
+        # patronomic=return_field_client(client, "patronomic"), phone=return_field_client(client, "phone"),
+        # adress=return_field_client(client, "adress"), adress_one=return_field_client(client, "adress_one"),
+        # adress_two=return_field_client(client, "adress_two"), date=return_field_client(client, "date"),
+        # priority=return_field_client(client, "priority"),
+        # check_priority=return_field_client(client, "check_priority", boolean=True),
+        # make_general_comment=return_field_client(client, "make_general_comment"),
+        **kwargs_client,
         alfa_status_inn=return_bank_field(client, 'status_inn', 'alfabank'),
         alfa_comment=return_bank_field(client, 'comment', 'alfabank'),
         alfa_add_comment=return_bank_field(client, 'add_comment', 'alfabank'),
@@ -149,12 +111,11 @@ def create_clients_model(client: list, range_data: str):
         module_client_type=return_bank_field(client, 'client_type', 'modul'),
         module_city=return_bank_field(client, 'city', 'modul'),
         module_response=return_bank_field(client, 'response', 'modul'),
-        module_application_ID=return_bank_field(client, 'application_ID', 'modul'),
-        **kwargs_client
+        module_application_ID=return_bank_field(client, 'application_ID', 'modul')
     )
 
 
-def start_create_clients_model():
+def start_create_clients_model() -> None:
     spreadsheet_data = return_spreadsheet_data()
     values_list = spreadsheet_data['values']
     range_data = spreadsheet_data['range']

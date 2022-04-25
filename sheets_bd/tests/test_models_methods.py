@@ -1,5 +1,3 @@
-import time
-
 import django
 import os
 
@@ -8,7 +6,7 @@ django.setup()
 
 from unittest import TestCase
 from sheets_bd.functions.models_methods import (start_create_clients_model, return_spreadsheet_data,
-                                                create_sheet_responses, create_kwargs_client, return_field_client)
+                                                create_sheet_responses, create_kwargs_client)
 from sheets_bd.models import Clients, SheetsResponses, RangeModel
 
 
@@ -52,6 +50,4 @@ class SoloFunctionsTestCase(TestCase):
     def test_return_fields(self):
         exception_list = ['id', 'range_field']
         field_name_list = [field.name for field in Clients._meta.get_fields() if field.name not in exception_list]
-        # for field in Clients._meta.get_fields():
-        #     print(field.name)
         print(field_name_list)
