@@ -31,6 +31,7 @@ class RangeModel(SpreadsheetAbs):
 class Clients(models.Model):
     range_field = models.ForeignKey(RangeModel, verbose_name="Диапазон", on_delete=models.CASCADE, null=True,
                                     blank=True)
+    diapason_row = models.IntegerField(verbose_name='Строка диапазона', blank=True, default='')
     inn = models.CharField(max_length=12, verbose_name='ИНН', unique=True)
     name_company = models.CharField(max_length=500, verbose_name='Компания', blank=True, default='')
     surname = models.CharField(max_length=120, verbose_name='Фамилия', blank=True, default='')

@@ -6,7 +6,7 @@ from sheets_bd.models import Clients, SheetsResponses, RangeModel
 
 
 class ParentClientsAdmin(admin.ModelAdmin):
-    list_display = ['id'] + ['range_field'] + full_list_display
+    list_display = ['id'] + ['range_field'] + ['diapason_row'] + full_list_display
     list_per_page = 5
     fieldsets = clients_fieldsets
 
