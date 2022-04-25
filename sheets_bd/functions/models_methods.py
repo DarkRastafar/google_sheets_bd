@@ -1,5 +1,5 @@
 import time
-from sheets_bd.functions.fields_methods import create_kwargs_client, return_bank_field
+from sheets_bd.functions.fields_methods import create_kwargs_client, return_bank_field, return_mutation_client
 from sheets_bd.functions.spreadsheet import Spreadsheet
 from sheets_bd.models import Clients, RangeModel, SheetsResponses
 from loguru import logger
@@ -37,15 +37,6 @@ def create_clients_model(client: list, range_data: str) -> None:
     kwargs_client = create_kwargs_client(client)
     Clients.objects.create(
         range_field=return_range_model_instance(range_data),
-        # inn=return_field_client(client, "inn"),
-        # name_company=return_field_client(client, "name_company"),
-        # surname=return_field_client(client, "surname"), first_name=return_field_client(client, "first_name"),
-        # patronomic=return_field_client(client, "patronomic"), phone=return_field_client(client, "phone"),
-        # adress=return_field_client(client, "adress"), adress_one=return_field_client(client, "adress_one"),
-        # adress_two=return_field_client(client, "adress_two"), date=return_field_client(client, "date"),
-        # priority=return_field_client(client, "priority"),
-        # check_priority=return_field_client(client, "check_priority", boolean=True),
-        # make_general_comment=return_field_client(client, "make_general_comment"),
         **kwargs_client,
         alfa_status_inn=return_bank_field(client, 'status_inn', 'alfabank'),
         alfa_comment=return_bank_field(client, 'comment', 'alfabank'),
@@ -105,13 +96,13 @@ def create_clients_model(client: list, range_data: str) -> None:
         psb_response=return_bank_field(client, 'response', 'psb'),
         psb_application_ID=return_bank_field(client, 'application_ID', 'psb'),
 
-        module_comment=return_bank_field(client, 'comment', 'modul'),
-        module_add_comment=return_bank_field(client, 'add_comment', 'modul'),
-        module_send=return_bank_field(client, 'send', 'modul', boolean=True),
-        module_client_type=return_bank_field(client, 'client_type', 'modul'),
-        module_city=return_bank_field(client, 'city', 'modul'),
-        module_response=return_bank_field(client, 'response', 'modul'),
-        module_application_ID=return_bank_field(client, 'application_ID', 'modul')
+        module_comment=return_bank_field(client, 'comment', 'module'),
+        module_add_comment=return_bank_field(client, 'add_comment', 'module'),
+        module_send=return_bank_field(client, 'send', 'module', boolean=True),
+        module_client_type=return_bank_field(client, 'client_type', 'module'),
+        module_city=return_bank_field(client, 'city', 'module'),
+        module_response=return_bank_field(client, 'response', 'module'),
+        module_application_ID=return_bank_field(client, 'application_ID', 'module')
     )
 
 
@@ -122,6 +113,7 @@ def start_create_clients_model() -> None:
     len_values_list = len(values_list)
     start = time.monotonic()
     for index, client in enumerate(values_list[1:]):
+        client = return_mutation_client(client)
         create_clients_model(client, range_data)
         logger.info(f'{index} из {len_values_list} сохранено')
     print(f'end time ---> {time.monotonic() - start}')

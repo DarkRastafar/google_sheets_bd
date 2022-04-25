@@ -1,5 +1,6 @@
-from config import BANK_LIST, EXCEPTION_LIST
-from sheets_bd.functions.sheet import return_index_client, return_index_bank
+from config import BANK_LIST, EXCEPTION_LIST, BOOLEAN_VARIABLES_CLIENT_LIST, MAX_LEN_CLIENT
+from sheets_bd.functions.sheet import return_index_client, return_index_bank, return_bool_index_bank_list, \
+    return_bool_index_client_list
 from sheets_bd.models import Clients
 
 
@@ -52,3 +53,33 @@ def create_kwargs_client(client: list, bank: str = None) -> dict:
     for field in return_model_fields(bank):
         kwargs_client.update({field: return_field_client(client, field)})
     return kwargs_client
+
+
+def extend_client_indexes(client: list) -> None:
+    len_client = len(client)
+    if len_client < MAX_LEN_CLIENT:
+        for index in range(len_client, MAX_LEN_CLIENT + 1):
+            client.insert(index, '')
+
+
+def boolean_mutation(client: list) -> None:
+    bool_indexes = return_bool_index_client_list() + return_bool_index_bank_list()
+    for index, var in enumerate(client):
+        if index in bool_indexes:
+            client[index] = bool(client[index]) if client[index] == ('TRUE' or 'FALSE') else False
+
+
+def mutation_inn(client: list) -> str:
+    if len(client[0]) == 11 or len(client[0]) == 9:
+        client[0] = f'0{client[0]}'
+    client[0] = client[0].replace('.0', '')
+    if len(client[0]) == 10 or len(client[0]) == 12:
+        return client[0]
+    return client[0]
+
+
+def return_mutation_client(client: list) -> list:
+    for func in [extend_client_indexes, boolean_mutation, mutation_inn]:
+        func(client)
+    return client
+

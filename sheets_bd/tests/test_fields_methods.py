@@ -5,7 +5,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "google_sheets_bd.settings")
 django.setup()
 
 from unittest import TestCase
-from sheets_bd.functions.fields_methods import return_model_fields
+from sheets_bd.functions.fields_methods import return_model_fields, return_mutation_client
 
 
 class SoloFunctionsTestCase(TestCase):
@@ -13,3 +13,17 @@ class SoloFunctionsTestCase(TestCase):
         test_res = return_model_fields('alfa')
         print(test_res)
         print(type(test_res))
+
+    def test_mutation_client(self):
+        client = ['718186848', 'ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ "ЛОГФИНСОФТ"', 'КОРОЛЕВА', 'МАРИНА',
+                  'ВЯЧЕСЛАВОВНА', '79260115044',
+                  '107258, ГОРОД МОСКВА, , , , БУЛЬВАР МАРШАЛА РОКОССОВСКОГО, 39/22, , 128', 'МОСКВА', '', '', '1',
+                  'TRUE', '', '', '', '', '', '', '', 'Москва', '', '0c5b2444-70a0-4932-980c-b4dc0d3f02b5', '', '', '',
+                  '', '', '', '', '', '', 'TRUE', '', 'Москва', '4', '', '', '', '', '', '', '', '', '', '', '', '', '',
+                  '', '', '', '', '', 'success', '', '', '', '', 'Москва', '', '', '', '', '', '', '', '', '', '', '',
+                  '', '', '', '', '', '', '', '', '', '', 'Москва', '', '1']
+        print(len(client))
+        test_res = return_mutation_client(client)
+        print(test_res)
+        print(len(client))
+        print(client[95])

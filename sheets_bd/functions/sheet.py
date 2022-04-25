@@ -1,3 +1,5 @@
+from config import BOOLEAN_VARIABLES_CLIENT_LIST, BOOLEAN_VARIABLES_BANK_LIST
+
 tables_dict = {
     "client": {
         "inn": "A",
@@ -80,7 +82,7 @@ tables_dict = {
             "response": "CD",
             "application_ID": "CE",
         },
-        "modul": {
+        "module": {
             "comment": "CL",
             "add_comment": "CM",
             "send": "CN",
@@ -179,6 +181,30 @@ def return_index_bank(bank, field):
     return relevance_dict[tables_dict['bankes'][bank][field]]
 
 
+def return_bank_index_list(bank):
+    return [relevance_dict[tables_dict['bankes'][bank][bool_field]]
+            for bool_field in BOOLEAN_VARIABLES_BANK_LIST
+            if bool_field in tables_dict['bankes'][bank]]
+
+
+def return_bool_index_bank_list():
+    result = []
+    for bank in tables_dict['bankes']:
+        result.extend(return_bank_index_list(bank))
+    return result
+
+
+def return_bool_index_client_list():
+    return [relevance_dict[tables_dict['client'][bool_field]]
+            for bool_field in BOOLEAN_VARIABLES_CLIENT_LIST
+            if bool_field in tables_dict['client']]
+
+
+
 if __name__ == "__main__":
-    print(return_index_client("inn"))
-    print(return_index_bank('alfabank', 'add_comment'))
+    # print(return_index_client("inn"))
+    # print(return_index_bank('alfabank', 'add_comment'))
+    # create_bool_index_list()
+    # print(return_bank_index_list('vtb'))
+    print(return_bool_index_bank_list())
+    print(return_bool_index_client_list())
