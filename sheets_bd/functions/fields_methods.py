@@ -1,6 +1,6 @@
-from config import BANK_LIST, EXCEPTION_LIST, MAX_LEN_CLIENT
-from sheets_bd.functions.sheet import return_index_client, return_index_bank, return_bool_index_bank_list, \
-    return_bool_index_client_list
+from sheets_bd.functions.sheet_index_methods import (return_bool_index_bank_list, return_bool_index_client_list,
+                                                     return_index_client, return_index_bank, BANK_LIST, EXCEPTION_LIST,
+                                                     MAX_LEN_CLIENT)
 from sheets_bd.models import Clients
 
 
