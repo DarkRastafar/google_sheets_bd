@@ -60,7 +60,7 @@ def boolean_mutation(client: list) -> None:
 def mutation_inn(client: list) -> str:
     if len(client[0]) == 11 or len(client[0]) == 9:
         client[0] = f'0{client[0]}'
-    client[0] = client[0].replace('.0', '')
+
     if len(client[0]) == 10 or len(client[0]) == 12:
         return client[0]
     return client[0]

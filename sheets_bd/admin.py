@@ -18,7 +18,7 @@ class SheetsResponsesInline(admin.TabularInline):
 
 @admin.register(RangeModel)
 class RangeModelAdmin(admin.ModelAdmin):
-    list_display = ['range_field']
+    list_display = ['range_field', 'start_diapason', 'end_diapason', 'name', 'spreadsheets_id', 'sheet', 'sheet_ID']
     list_per_page = 5
     inlines = [SheetsResponsesInline]
 

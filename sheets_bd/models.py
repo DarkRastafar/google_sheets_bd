@@ -1,8 +1,24 @@
 from django.db import models
 
 
-class RangeModel(models.Model):
+class SpreadsheetAbs(models.Model):
+    name = models.CharField('Таблица', max_length=400, null=True, blank=True)
+    spreadsheets_id = models.CharField(max_length=400, null=True, blank=True)
+    sheet = models.CharField('Название_листа', max_length=400, null=True, blank=True)
+    sheet_ID = models.CharField('ID_Листа', max_length=400, null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Таблицы'
+        abstract = True
+
+
+class RangeModel(SpreadsheetAbs):
     range_field = models.CharField(max_length=120, verbose_name='Диапазон', null=True, blank=True)
+    start_diapason = models.CharField(max_length=120, verbose_name='Начало диапазона', null=True, blank=True)
+    end_diapason = models.CharField(max_length=120, verbose_name='Конец диапазона', null=True, blank=True)
 
     def __str__(self):
         return f'{self.range_field}'
@@ -120,4 +136,7 @@ class SheetsResponses(models.Model):
     class Meta:
         verbose_name = 'Ответ таблицы'
         verbose_name_plural = 'Ответы таблиц'
+
+
+
 

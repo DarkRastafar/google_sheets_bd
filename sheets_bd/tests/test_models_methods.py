@@ -12,7 +12,7 @@ from sheets_bd.models import Clients, SheetsResponses, RangeModel
 
 class SoloFunctionsTestCase(TestCase):
     def test_return_spreadsheet_data(self):
-        print(return_spreadsheet_data()['values'][5])
+        print(return_spreadsheet_data()['values'][0:6])
         # for index, client in enumerate(return_spreadsheet_data()['values'][5]):
         #     print(f'{client} ---- {index}')
 
