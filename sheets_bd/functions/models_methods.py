@@ -1,7 +1,9 @@
+import sys
+sys.path.append('C:\\CustomMethods\\')
 import time
 from config import BANK_LIST
 from sheets_bd.functions.fields_methods import (create_kwargs_client, return_mutation_client, create_kwargs_banks)
-from sheets_bd.functions.spreadsheet import Spreadsheet
+from custom_Spreadsheet.Spreadsheet import Spreadsheet
 from sheets_bd.models import Clients, RangeModel, SheetsResponses
 from loguru import logger
 
