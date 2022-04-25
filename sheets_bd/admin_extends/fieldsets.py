@@ -6,39 +6,39 @@ clients_fieldsets = [(None, {
                    ('priority', 'check_priority', 'make_general_comment',),)
     }),
                  ('Альфабанк', {
-                     'fields': (('alfa_status_inn', 'alfa_comment', 'alfa_additional_comment'),
-                                ('alfa_str_comment', 'alfa_client_type', 'alfa_bank_city', ),
-                                ('alfa_bank_response', 'alfa_fias', 'alfa_ekvairing', ),
-                                ('alfa_spec_schet_44', 'alfa_credit', 'alfa_send_rko',),)
+                     'fields': (('alfa_status_inn', 'alfa_comment', 'alfa_add_comment'),
+                                ('alfa_str_comment', 'alfa_client_type', 'alfa_city', ),
+                                ('alfa_response', 'alfa_fias', 'alfa_ekvairing', ),
+                                ('alfa_spec_schet_44', 'alfa_credit', 'alfa_send',),)
                  }),
                  ('ВТБ', {
-                     'fields': (('vtb_status_inn', 'vtb_comment', 'vtb_additional_comment',),
-                                ('vtb_client_type', 'vtb_bank_response', 'vtb_id_application'),
-                                ('vtb_bank_city', 'vtb_fixed', 'vtb_send',),)
+                     'fields': (('vtb_status_inn', 'vtb_comment', 'vtb_add_comment',),
+                                ('vtb_client_type', 'vtb_response', 'vtb_application_ID'),
+                                ('vtb_city', 'vtb_to_fix', 'vtb_send',),)
                  }),
                  ('Тинькофф', {
-                     'fields': (('tinkoff_status_inn', 'tinkoff_comment', 'tinkoff_additional_comment'),
-                                ('tinkoff_client_type', 'tinkoff_bank_city', 'tinkoff_bank_response'),
+                     'fields': (('tinkoff_status_inn', 'tinkoff_comment', 'tinkoff_add_comment'),
+                                ('tinkoff_client_type', 'tinkoff_city', 'tinkoff_response'),
                                 ('tinkoff_send',),)
                  }),
                  ('Открытие', {
-                     'fields': (('otkritie_status_inn', 'otkritie_comment', 'otkritie_additional_comment'),
-                                ('otkritie_client_type', 'otkritie_bank_city', 'otkritie_bank_response'),
+                     'fields': (('otkritie_status_inn', 'otkritie_comment', 'otkritie_add_comment'),
+                                ('otkritie_client_type', 'otkritie_city', 'otkritie_response'),
                                 ('otkritie_send', 'otkritie_ekvaring'),)
                  }),
                  ('Точка', {
-                     'fields': (('tochka_status_inn', 'tochka_comment', 'tochka_additional_comment'),
-                                ('tochka_client_type', 'tochka_bank_city', 'tochka_do_not_call'),
+                     'fields': (('tochka_status_inn', 'tochka_comment', 'tochka_add_comment'),
+                                ('tochka_client_type', 'tochka_city', 'tochka_dont_send'),
                                 ('tochka_send',),)
                  }),
                  ('ПСБ', {
-                     'fields': (('psb_status_inn', 'psb_comment', 'psb_additional_comment'),
-                                ('psb_client_type', 'psb_bank_city', 'psb_bank_response', 'psb_id_application'),
+                     'fields': (('psb_status_inn', 'psb_comment', 'psb_add_comment'),
+                                ('psb_client_type', 'psb_city', 'psb_response', 'psb_application_ID'),
                                 ('psb_send',),)
                  }),
                  ('Модуль', {
-                     'fields': (('module_comment', 'module_additional_comment', 'module_client_type'),
-                                ('module_bank_city', 'module_bank_response', 'module_id_application'),
+                     'fields': (('module_comment', 'module_add_comment', 'module_client_type'),
+                                ('module_city', 'module_response', 'module_application_ID'),
                                 ('module_send',),)
                  }),
                  ]

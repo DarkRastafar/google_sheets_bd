@@ -20,7 +20,7 @@ tables_dict = {
             "comment": "O",
             "add_comment": "P",
             "str_comment": "Q",
-            "send_rko": "R",
+            "send": "R",
             "client_type": "S",
             "city": "T",
             "response": "U",
@@ -78,7 +78,7 @@ tables_dict = {
             "client_type": "CB",
             "city": "CC",
             "response": "CD",
-            "int_field": "CE",
+            "application_ID": "CE",
         },
         "modul": {
             "comment": "CL",
