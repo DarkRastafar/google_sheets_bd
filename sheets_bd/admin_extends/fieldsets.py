@@ -6,10 +6,10 @@ clients_fieldsets = [(None, {
                    ('priority', 'check_priority', 'make_general_comment',),)
     }),
                  ('Альфабанк', {
-                     'fields': (('alfa_status_inn', 'alfa_comment', 'alfa_add_comment'),
-                                ('alfa_str_comment', 'alfa_client_type', 'alfa_city', ),
-                                ('alfa_response', 'alfa_fias', 'alfa_ekvairing', ),
-                                ('alfa_spec_schet_44', 'alfa_credit', 'alfa_send',),)
+                     'fields': (('alfabank_status_inn', 'alfabank_comment', 'alfabank_add_comment'),
+                                ('alfabank_str_comment', 'alfabank_client_type', 'alfabank_city', ),
+                                ('alfabank_response', 'alfabank_fias', 'alfabank_ekvairing', ),
+                                ('alfabank_spec_schet_44', 'alfabank_credit', 'alfabank_send',),)
                  }),
                  ('ВТБ', {
                      'fields': (('vtb_status_inn', 'vtb_comment', 'vtb_add_comment',),
@@ -22,9 +22,9 @@ clients_fieldsets = [(None, {
                                 ('tinkoff_send',),)
                  }),
                  ('Открытие', {
-                     'fields': (('otkritie_status_inn', 'otkritie_comment', 'otkritie_add_comment'),
-                                ('otkritie_client_type', 'otkritie_city', 'otkritie_response'),
-                                ('otkritie_send', 'otkritie_ekvaring'),)
+                     'fields': (('open_status_inn', 'open_comment', 'open_add_comment'),
+                                ('open_client_type', 'open_city', 'open_response'),
+                                ('open_send', 'open_ekvairing'),)
                  }),
                  ('Точка', {
                      'fields': (('tochka_status_inn', 'tochka_comment', 'tochka_add_comment'),

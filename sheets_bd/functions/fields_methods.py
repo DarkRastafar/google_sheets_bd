@@ -1,4 +1,4 @@
-from config import BANK_LIST, EXCEPTION_LIST, BOOLEAN_VARIABLES_CLIENT_LIST, MAX_LEN_CLIENT
+from config import BANK_LIST, EXCEPTION_LIST, MAX_LEN_CLIENT
 from sheets_bd.functions.sheet import return_index_client, return_index_bank, return_bool_index_bank_list, \
     return_bool_index_client_list
 from sheets_bd.models import Clients
@@ -20,39 +20,27 @@ def return_model_fields(bank: str = None) -> list:
         return [field.name for field in Clients._meta.get_fields() if bank in field.name]
 
 
-def return_field_client(client: list, field: str, boolean: bool = False) -> [str, bool]:
-    try:
-        return check_boolean_variable(client[return_index_client(field)], boolean)
-    except:
-        if boolean is not None:
-            return boolean
-        return ''
+def return_field_client(client: list, field: str) -> [str, bool]:
+    return client[return_index_client(field)]
 
 
-def return_bank_field(client: list, field: str, bank: str, boolean: bool = False) -> [str, bool]:
-    try:
-        return check_boolean_variable(client[return_index_bank(bank, field)], boolean)
-    except:
-        if boolean is True:
-            return boolean
-        return ''
+def return_bank_field(client: list, field: str, bank: str) -> [str, bool]:
+    return client[return_index_bank(bank, field)]
 
 
-def check_boolean_variable(client_field: str, boolean: bool) -> [str, bool]:
-    if boolean is True:
-        variable_dict = {"TRUE": True, "FALSE": False}
-        if client_field in variable_dict:
-            return variable_dict[client_field]
-        else:
-            return False
-    return client_field
-
-
-def create_kwargs_client(client: list, bank: str = None) -> dict:
+def create_kwargs_client(client: list) -> dict:
     kwargs_client = {}
-    for field in return_model_fields(bank):
+    for field in return_model_fields():
         kwargs_client.update({field: return_field_client(client, field)})
     return kwargs_client
+
+
+def create_kwargs_banks(client: list, banks: list = None) -> dict:
+    kwargs_client_bank = {}
+    for bank in banks:
+        for field in return_model_fields(bank):
+            kwargs_client_bank.update({field: return_bank_field(client, field.replace(f'{bank}_', ''), bank)})
+    return kwargs_client_bank
 
 
 def extend_client_indexes(client: list) -> None:

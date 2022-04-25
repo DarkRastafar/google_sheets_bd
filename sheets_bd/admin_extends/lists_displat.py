@@ -1,10 +1,10 @@
 from sheets_bd.functions.fields_methods import return_model_fields
 
 
-alfabank_list_display = return_model_fields('alfa')
+alfabank_list_display = return_model_fields('alfabank')
 vtb_list_display = return_model_fields('vtb')
 tinkoff_list_display = return_model_fields('tinkoff')
-otkritie_list_display = return_model_fields('otkritie')
+otkritie_list_display = return_model_fields('open')
 tochka_list_display = return_model_fields('tochka')
 psb_list_display = return_model_fields('psb')
 module_list_display = return_model_fields('module')

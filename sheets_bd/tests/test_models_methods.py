@@ -24,12 +24,6 @@ class SoloFunctionsTestCase(TestCase):
         print(RangeModel.objects.all())
         print(SheetsResponses.objects.all())
 
-    def test_create_clients_model(self):
-        print(Clients.objects.all())
-        start_create_clients_model()
-        print(Clients.objects.all())
-        # Clients.objects.all().delete()
-
     def test_delete_all(self):
         Clients.objects.all().delete()
 
@@ -51,3 +45,8 @@ class SoloFunctionsTestCase(TestCase):
         exception_list = ['id', 'range_field']
         field_name_list = [field.name for field in Clients._meta.get_fields() if field.name not in exception_list]
         print(field_name_list)
+
+    def test_start_create_clients_model(self):
+        print(Clients.objects.all())
+        start_create_clients_model()
+        print(Clients.objects.all())
